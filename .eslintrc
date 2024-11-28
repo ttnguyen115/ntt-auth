@@ -1,0 +1,17 @@
+{
+    "env": {
+        "jest": true
+    },
+    "extends": [
+        "next/core-web-vitals",
+        "next/typescript",
+        "eslint-config-airbnb",
+        "plugin:@dword-design/import-alias/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "overrides": [
+        {
+            "files": ["*.js", "*.jsx", "*.ts", "*.tsx"]
+        }
+    ]
+}
