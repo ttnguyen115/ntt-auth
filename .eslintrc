@@ -6,6 +6,7 @@
         "next/core-web-vitals",
         "next/typescript",
         "eslint-config-airbnb",
+        "plugin:@dword-design/import-alias/recommended",
         "plugin:prettier/recommended",
         "plugin:react-hooks/recommended"
     ],
@@ -55,7 +56,7 @@
         "no-undef": "off",
         "no-underscore-dangle": "off",
         "no-unused-vars": [
-            "error",
+            "warn",
             {
                 "vars": "all",
                 "args": "none"
@@ -102,6 +103,19 @@
         "react/jsx-props-no-spreading": "off",
         "import/prefer-default-export": "off",
         "no-restricted-exports": "off",
+        // suppress errors for missing 'import React' in files
+        "react/react-in-jsx-scope": "off",
+        "react/require-default-props": "off",
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
         // TODO end here: Refactor these eslint rules above
 
         // iterators/generators require regenerator-runtime, which is too heavyweight for this guide to allow them.
@@ -187,12 +201,12 @@
                         "position": "after"
                     },
                     {
-                        "pattern": "@/config**",
+                        "pattern": "@/configs**",
                         "group": "internal",
                         "position": "after"
                     },
                     {
-                        "pattern": "@/config/**",
+                        "pattern": "@/configs/**",
                         "group": "internal",
                         "position": "after"
                     },
@@ -273,6 +287,16 @@
                     },
                     {
                         "pattern": "@/lib/**",
+                        "group": "internal",
+                        "position": "after"
+                    },
+                    {
+                        "pattern": "@/types**",
+                        "group": "internal",
+                        "position": "after"
+                    },
+                    {
+                        "pattern": "@/types/**",
                         "group": "internal",
                         "position": "after"
                     }
