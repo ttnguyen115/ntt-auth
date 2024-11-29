@@ -1,11 +1,12 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useState, useTransition } from 'react';
 
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+
+import { login } from '@/actions';
 
 import { AppRoutes, LoginSchema } from '@/configs';
 
@@ -16,8 +17,15 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
+import type { LoginSchemaValues } from '@/types';
+
 function LoginForm() {
-    const form = useForm<z.infer<typeof LoginSchema>>({
+    const [error, setError] = useState<string | undefined>('');
+    const [success, setSuccess] = useState<string | undefined>('');
+
+    const [isPending, startTransition] = useTransition();
+
+    const form = useForm<LoginSchemaValues>({
         resolver: zodResolver(LoginSchema),
         defaultValues: {
             email: '',
@@ -25,8 +33,16 @@ function LoginForm() {
         },
     });
 
-    const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-        console.log(values);
+    const onSubmit = (values: LoginSchemaValues) => {
+        setError('');
+        setSuccess('');
+
+        startTransition(() => {
+            login(values).then((result) => {
+                setError(result.error);
+                setSuccess(result.success);
+            });
+        });
     };
 
     return (
@@ -51,6 +67,7 @@ function LoginForm() {
                                     <FormControl>
                                         <Input
                                             {...field}
+                                            disabled={isPending}
                                             placeholder="abc@example.com"
                                             type="email"
                                         />
@@ -68,6 +85,7 @@ function LoginForm() {
                                     <FormControl>
                                         <Input
                                             {...field}
+                                            disabled={isPending}
                                             placeholder="******"
                                             type="password"
                                         />
@@ -78,10 +96,11 @@ function LoginForm() {
                         />
                     </div>
                     {/* TODO: combine FormError and FormSuccess => FormInfo || FormFeedbacks || ... */}
-                    <FormError message="Fuck!" />
-                    <FormSuccess message="Nice!" />
+                    <FormError message={error} />
+                    <FormSuccess message={success} />
                     <Button
                         className="w-full"
+                        disabled={isPending}
                         type="submit"
                     >
                         Login
