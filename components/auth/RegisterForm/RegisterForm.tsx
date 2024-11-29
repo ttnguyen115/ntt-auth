@@ -6,9 +6,9 @@ import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { login } from '@/actions';
+import { register } from '@/actions';
 
-import { AppRoutes, LoginSchema } from '@/configs';
+import { AppRoutes, RegisterSchema } from '@/configs';
 
 import CardWrapper from '@/components/shared/CardWrapper';
 import FormError from '@/components/shared/FormError';
@@ -17,28 +17,29 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-import type { LoginSchemaValues } from '@/types';
+import type { RegisterSchemaValues } from '@/types';
 
-function LoginForm() {
+function RegisterForm() {
     const [error, setError] = useState<string | undefined>('');
     const [success, setSuccess] = useState<string | undefined>('');
 
     const [isPending, startTransition] = useTransition();
 
-    const form = useForm<LoginSchemaValues>({
-        resolver: zodResolver(LoginSchema),
+    const form = useForm<RegisterSchemaValues>({
+        resolver: zodResolver(RegisterSchema),
         defaultValues: {
             email: '',
             password: '',
+            name: '',
         },
     });
 
-    const onSubmit = (values: LoginSchemaValues) => {
+    const onSubmit = (values: RegisterSchemaValues) => {
         setError('');
         setSuccess('');
 
         startTransition(() => {
-            login(values).then((result) => {
+            register(values).then((result) => {
                 setError(result.error);
                 setSuccess(result.success);
             });
@@ -47,9 +48,9 @@ function LoginForm() {
 
     return (
         <CardWrapper
-            backButtonHref={AppRoutes.REGISTER}
-            backButtonLabel="Don't have an account?"
-            headerLabel="Welcome back"
+            backButtonHref={AppRoutes.LOGIN}
+            backButtonLabel="Create an account"
+            headerLabel="Already have an account?"
             showSocial
         >
             <Form {...form}>
@@ -58,6 +59,24 @@ function LoginForm() {
                     onSubmit={form.handleSubmit(onSubmit)}
                 >
                     <div className="space-y-4">
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Name</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            {...field}
+                                            disabled={isPending}
+                                            placeholder="Example Name"
+                                            type="text"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                         <FormField
                             control={form.control}
                             name="email"
@@ -103,7 +122,7 @@ function LoginForm() {
                         disabled={isPending}
                         type="submit"
                     >
-                        Login
+                        Create an account
                     </Button>
                 </form>
             </Form>
@@ -111,4 +130,4 @@ function LoginForm() {
     );
 }
 
-export default memo(LoginForm);
+export default memo(RegisterForm);

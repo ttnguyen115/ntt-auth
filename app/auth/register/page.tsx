@@ -1,5 +1,7 @@
-function LoginPage() {
-    return <div>RegisterFormContainer</div>;
+import RegisterFormContainer from '@/containers/RegisterFormContainer';
+
+function RegisterPage() {
+    return <RegisterFormContainer />;
 }
 
-export default LoginPage;
+export default RegisterPage;

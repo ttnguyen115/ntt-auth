@@ -1,3 +1,3 @@
 export { default as AppRoutes } from './routes';
 
-export { LoginSchema } from './schemas';
+export { LoginSchema, RegisterSchema } from './schemas';
