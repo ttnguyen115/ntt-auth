@@ -214,11 +214,6 @@
                         "position": "after"
                     },
                     {
-                        "pattern": "@/ducks**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
                         "pattern": "@/hooks/**",
                         "group": "internal",
                         "position": "after"
@@ -250,16 +245,6 @@
                     },
                     {
                         "pattern": "@/containers/**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/scss**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/scss/**",
                         "group": "internal",
                         "position": "after"
                     },

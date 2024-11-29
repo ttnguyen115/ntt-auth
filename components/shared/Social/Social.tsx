@@ -18,7 +18,7 @@ function Social() {
             key={Icon.name}
             {...buttonProps}
         >
-            <Icon className="h-5 w-5" />
+            <Icon className="size-5" />
         </Button>
     ));
 
