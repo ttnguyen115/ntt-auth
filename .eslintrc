@@ -279,6 +279,16 @@
                         "position": "after"
                     },
                     {
+                        "pattern": "@/prisma**",
+                        "group": "internal",
+                        "position": "after"
+                    },
+                    {
+                        "pattern": "@/prisma/**",
+                        "group": "internal",
+                        "position": "after"
+                    },
+                    {
                         "pattern": "@/types**",
                         "group": "internal",
                         "position": "after"
