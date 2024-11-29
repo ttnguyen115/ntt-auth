@@ -17,6 +17,7 @@ function LoginButton({ children, mode = 'redirect', asChild = false }: LoginButt
     const router = useRouter();
 
     const handleClick = () => {
+        console.log(`This component is asChild: ${asChild}`);
         router.push(AppRoutes.LOGIN);
     };
 

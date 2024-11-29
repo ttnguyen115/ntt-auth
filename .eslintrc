@@ -5,24 +5,21 @@
     "extends": [
         "next/core-web-vitals",
         "next/typescript",
+        "eslint:recommended",
         "eslint-config-airbnb",
         "plugin:@dword-design/import-alias/recommended",
         "plugin:prettier/recommended",
-        "plugin:react-hooks/recommended"
+        "plugin:react-hooks/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
     "overrides": [
         {
             "files": ["*.js", "*.jsx", "*.ts", "*.tsx"]
         }
     ],
-    "parser": "@babel/eslint-parser",
-    "parserOptions": {
-        "babelOptions": {
-            "configFile": "./babel.eslint.js",
-            "presets": ["@babel/preset-react"]
-        }
-    },
-    "plugins": ["jsx-a11y", "react-hooks", "listeners", "github"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["jsx-a11y", "react-hooks", "listeners", "github", "@typescript-eslint"],
     "rules": {
         "array-callback-return": "off",
         "class-methods-use-this": "off",
@@ -56,10 +53,16 @@
         "no-undef": "off",
         "no-underscore-dangle": "off",
         "no-unused-vars": [
-            "warn",
+            "error",
             {
                 "vars": "all",
                 "args": "none"
+            }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "^_"
             }
         ],
         "object-curly-newline": "off",
