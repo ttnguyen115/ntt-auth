@@ -187,11 +187,6 @@
                         "position": "after"
                     },
                     {
-                        "pattern": "@/analytics/**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
                         "pattern": "@/config**",
                         "group": "internal",
                         "position": "after"
@@ -203,31 +198,6 @@
                     },
                     {
                         "pattern": "@/ducks**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/ducks/**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/plugins**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/plugins/**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/fetchers**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/fetchers/**",
                         "group": "internal",
                         "position": "after"
                     },
@@ -247,42 +217,12 @@
                         "position": "after"
                     },
                     {
-                        "pattern": "@/modules**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/modules/**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/redux**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/redux/**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
                         "pattern": "@/pages/**",
                         "group": "internal",
                         "position": "after"
                     },
                     {
                         "pattern": "@/theme/**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/transformers**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/transformers/**",
                         "group": "internal",
                         "position": "after"
                     },
@@ -313,26 +253,6 @@
                     },
                     {
                         "pattern": "@/contexts/**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/context-middleware**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/context-middleware/**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/shadcn**",
-                        "group": "internal",
-                        "position": "after"
-                    },
-                    {
-                        "pattern": "@/shadcn/**",
                         "group": "internal",
                         "position": "after"
                     },
