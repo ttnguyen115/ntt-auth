@@ -40,8 +40,11 @@ function RegisterForm() {
 
         startTransition(() => {
             register(values).then((result) => {
-                setError(result.error);
-                setSuccess(result.success);
+                if (result?.success) {
+                    setSuccess(result?.message);
+                    // TODO: add success notification when adding 2FA
+                }
+                setError(result?.error);
             });
         });
     };
