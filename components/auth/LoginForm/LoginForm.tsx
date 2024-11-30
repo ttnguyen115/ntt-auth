@@ -4,6 +4,8 @@ import { memo, useState, useTransition } from 'react';
 
 import { useForm } from 'react-hook-form';
 
+import { useSearchParams } from 'next/navigation';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { login } from '@/actions';
@@ -19,6 +21,12 @@ import { Input } from '@/components/ui/input';
 import type { LoginSchemaValues } from '@/types';
 
 function LoginForm() {
+    const searchParams = useSearchParams();
+    const urlError =
+        searchParams.get('error') === 'OAuthAccountNotLinked'
+            ? 'Email already in use with different provider!'
+            : undefined;
+
     const [error, setError] = useState<string | undefined>('');
 
     const [isPending, startTransition] = useTransition();
@@ -37,6 +45,7 @@ function LoginForm() {
         startTransition(() => {
             login(values).then((result) => {
                 setError(result?.error);
+                // TODO: add success notification when adding 2FA
             });
         });
     };
@@ -91,7 +100,7 @@ function LoginForm() {
                             )}
                         />
                     </div>
-                    <FormError message={error} />
+                    <FormError message={error || urlError} />
                     <Button
                         className="w-full"
                         disabled={isPending}

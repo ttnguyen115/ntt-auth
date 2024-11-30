@@ -1,22 +1,54 @@
+'use client';
+
 import { memo } from 'react';
 
+import { IconType } from 'react-icons';
+
+import { signIn } from 'next-auth/react';
 import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
+import { AppRoutes } from '@/configs';
+
 import { Button, type ButtonProps } from '@/components/ui/button';
 
+interface SocialCredential {
+    id: string;
+    name: 'google' | 'github';
+    Icon: IconType;
+}
+
+const socialCredentials: SocialCredential[] = [
+    {
+        id: 'google',
+        name: 'google',
+        Icon: FcGoogle,
+    },
+    {
+        id: 'github',
+        name: 'github',
+        Icon: FaGithub,
+    },
+];
+
 function Social() {
+    const onClick = (provider: 'google' | 'github') => {
+        signIn(provider, {
+            redirectTo: AppRoutes.SETTINGS,
+        });
+    };
+
     const buttonProps: ButtonProps = {
         className: 'w-full',
-        onClick: () => {}, // TODO: remember to nest it inside useCallback
         size: 'lg',
         variant: 'outline',
     };
 
-    const renderIconButtons = [FcGoogle, FaGithub].map((Icon) => (
+    const renderIconButtons = socialCredentials.map(({ id, name, Icon }) => (
         <Button
-            key={Icon.name}
+            key={id}
             {...buttonProps}
+            onClick={() => onClick(name)}
         >
             <Icon className="size-5" />
         </Button>

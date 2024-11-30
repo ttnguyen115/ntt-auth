@@ -14,7 +14,7 @@ export const PublicRoutes = [AppRoutes.DEFAULT];
  *  These routes will redirect logged-in users to /settings
  *  @type {string[]}
  */
-export const AuthRoutes = [AppRoutes.LOGIN, AppRoutes.REGISTER];
+export const AuthRoutes = [AppRoutes.LOGIN, AppRoutes.REGISTER, AppRoutes.AUTH_ERROR];
 
 /*
  *  The prefix for API authentication routes
