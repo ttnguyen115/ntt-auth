@@ -40,6 +40,7 @@ function Social() {
 
     const buttonProps: ButtonProps = {
         className: 'w-full',
+        role: 'button',
         size: 'lg',
         variant: 'outline',
     };
@@ -47,8 +48,9 @@ function Social() {
     const renderIconButtons = socialCredentials.map(({ id, name, Icon }) => (
         <Button
             key={id}
-            {...buttonProps}
+            aria-label={name}
             onClick={() => onClick(name)}
+            {...buttonProps}
         >
             <Icon className="size-5" />
         </Button>
