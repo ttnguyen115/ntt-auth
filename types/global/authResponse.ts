@@ -15,3 +15,9 @@ export interface IVerificationResponse {
     success: boolean;
     message?: string;
 }
+
+export interface IResetResponse {
+    error?: string;
+    success: boolean;
+    message?: string;
+}

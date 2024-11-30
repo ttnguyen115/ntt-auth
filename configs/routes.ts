@@ -4,6 +4,8 @@ const AppRoutes = {
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
     VERIFICATION: '/auth/new-verification',
+    NEW_PASSWORD: '/auth/new-password',
+    RESET: '/auth/reset',
     AUTH_ERROR: '/auth/error',
     SETTINGS: '/settings',
 };

@@ -4,14 +4,11 @@ import { memo, useState, useTransition } from 'react';
 
 import { useForm } from 'react-hook-form';
 
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { login } from '@/actions';
+import { reset } from '@/actions';
 
-import { AppRoutes, LoginSchema } from '@/configs';
+import { AppRoutes, ResetSchema } from '@/configs';
 
 import CardWrapper from '@/components/shared/CardWrapper';
 import FormError from '@/components/shared/FormError';
@@ -20,33 +17,26 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-import type { LoginSchemaValues } from '@/types';
+import type { ResetSchemaValues } from '@/types';
 
-function LoginForm() {
-    const searchParams = useSearchParams();
-    const urlError =
-        searchParams.get('error') === 'OAuthAccountNotLinked'
-            ? 'Email already in use with different provider!'
-            : undefined;
-
+function ResetForm() {
     const [error, setError] = useState<string | undefined>('');
     const [success, setSuccess] = useState<string | undefined>('');
 
     const [isPending, startTransition] = useTransition();
 
-    const form = useForm<LoginSchemaValues>({
-        resolver: zodResolver(LoginSchema),
+    const form = useForm<ResetSchemaValues>({
+        resolver: zodResolver(ResetSchema),
         defaultValues: {
             email: '',
-            password: '',
         },
     });
 
-    const onSubmit = (values: LoginSchemaValues) => {
+    const onSubmit = (values: ResetSchemaValues) => {
         setError('');
 
         startTransition(() => {
-            login(values).then((result) => {
+            reset(values).then((result) => {
                 if (result?.success) {
                     setSuccess(result?.message);
                     // TODO: add success notification when adding 2FA
@@ -58,10 +48,9 @@ function LoginForm() {
 
     return (
         <CardWrapper
-            backButtonHref={AppRoutes.REGISTER}
-            backButtonLabel="Don't have an account?"
-            headerLabel="Welcome back"
-            showSocial
+            backButtonHref={AppRoutes.LOGIN}
+            backButtonLabel="Back to login"
+            headerLabel="Forgot your password?"
         >
             <Form {...form}>
                 <form
@@ -87,41 +76,15 @@ function LoginForm() {
                                 </FormItem>
                             )}
                         />
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Password</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            {...field}
-                                            disabled={isPending}
-                                            placeholder="******"
-                                            type="password"
-                                        />
-                                    </FormControl>
-                                    <Button
-                                        size="sm"
-                                        variant="link"
-                                        asChild
-                                        className="px-0 font-normal"
-                                    >
-                                        <Link href={AppRoutes.RESET}>Forgot password?</Link>
-                                    </Button>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
                     </div>
-                    <FormError message={error || urlError} />
+                    <FormError message={error} />
                     <FormSuccess message={success} />
                     <Button
                         className="w-full"
                         disabled={isPending}
                         type="submit"
                     >
-                        Login
+                        Send reset email
                     </Button>
                 </form>
             </Form>
@@ -129,4 +92,4 @@ function LoginForm() {
     );
 }
 
-export default memo(LoginForm);
+export default memo(ResetForm);
