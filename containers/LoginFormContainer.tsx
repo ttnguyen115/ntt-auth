@@ -1,9 +1,13 @@
-import { memo } from 'react';
+import { memo, Suspense } from 'react';
 
 import LoginForm from '@/components/auth/LoginForm';
 
 function LoginFormContainer() {
-    return <LoginForm />;
+    return (
+        <Suspense>
+            <LoginForm />
+        </Suspense>
+    );
 }
 
 export default memo(LoginFormContainer);
