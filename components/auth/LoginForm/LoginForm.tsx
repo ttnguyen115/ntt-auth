@@ -12,7 +12,6 @@ import { AppRoutes, LoginSchema } from '@/configs';
 
 import CardWrapper from '@/components/shared/CardWrapper';
 import FormError from '@/components/shared/FormError';
-import FormSuccess from '@/components/shared/FormSuccess';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -21,7 +20,6 @@ import type { LoginSchemaValues } from '@/types';
 
 function LoginForm() {
     const [error, setError] = useState<string | undefined>('');
-    const [success, setSuccess] = useState<string | undefined>('');
 
     const [isPending, startTransition] = useTransition();
 
@@ -35,12 +33,10 @@ function LoginForm() {
 
     const onSubmit = (values: LoginSchemaValues) => {
         setError('');
-        setSuccess('');
 
         startTransition(() => {
             login(values).then((result) => {
-                setError(result.error);
-                setSuccess(result.success);
+                setError(result?.error);
             });
         });
     };
@@ -95,9 +91,7 @@ function LoginForm() {
                             )}
                         />
                     </div>
-                    {/* TODO: combine FormError and FormSuccess => FormInfo || FormFeedbacks || ... */}
                     <FormError message={error} />
-                    <FormSuccess message={success} />
                     <Button
                         className="w-full"
                         disabled={isPending}

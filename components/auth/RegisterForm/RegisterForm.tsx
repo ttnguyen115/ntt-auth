@@ -49,8 +49,8 @@ function RegisterForm() {
     return (
         <CardWrapper
             backButtonHref={AppRoutes.LOGIN}
-            backButtonLabel="Create an account"
-            headerLabel="Already have an account?"
+            backButtonLabel="Already have an account?"
+            headerLabel="Create an account"
             showSocial
         >
             <Form {...form}>
