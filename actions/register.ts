@@ -7,15 +7,25 @@ import { getUserByEmail } from '@/fetchers';
 import { RegisterSchema } from '@/configs';
 
 import { db } from '@/lib/db';
+import { sendVerificationEmail } from '@/lib/mail';
+import { generateVerificationToken } from '@/lib/tokens';
 
-import type { RegisterSchemaValues } from '@/types';
+import { IRegisterResponse, RegisterSchemaValues } from '@/types';
 
-async function register(values: RegisterSchemaValues) {
+/**
+ * This is server function to handle register by email-password credential
+ * @param {RegisterSchemaValues} values
+ * @returns {Promise<IRegisterResponse>}
+ */
+async function register(values: RegisterSchemaValues): Promise<IRegisterResponse> {
     const { error, data } = RegisterSchema.safeParse(values);
     const { name = '', email = '', password = '' } = data as RegisterSchemaValues;
 
     if (!name || !email || !password || error) {
-        return { error: 'Invalid fields!' };
+        return {
+            success: false,
+            error: 'Invalid fields!',
+        };
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -23,7 +33,10 @@ async function register(values: RegisterSchemaValues) {
     const existingUser = await getUserByEmail(email);
 
     if (existingUser) {
-        return { error: 'Email already in use!' };
+        return {
+            success: false,
+            error: 'Email already in use!',
+        };
     }
 
     await db.user.create({
@@ -34,9 +47,13 @@ async function register(values: RegisterSchemaValues) {
         },
     });
 
-    // TODO: Send verification token email
+    const { email: returnedEmail, token } = await generateVerificationToken(email);
+    await sendVerificationEmail(returnedEmail, token);
 
-    return { success: 'Email sent!' };
+    return {
+        success: true,
+        message: 'Confirm verification token!',
+    };
 }
 
 export default register;

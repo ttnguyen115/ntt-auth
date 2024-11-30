@@ -7,7 +7,7 @@ import { AppRoutes } from './configs';
  *  These routes do not require authentication
  *  @type {string[]}
  */
-export const PublicRoutes = [AppRoutes.DEFAULT];
+export const PublicRoutes = [AppRoutes.DEFAULT, AppRoutes.VERIFICATION];
 
 /*
  *  An array of routes that are used for authentication
