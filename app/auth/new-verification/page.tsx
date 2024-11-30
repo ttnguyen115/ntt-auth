@@ -1,7 +1,13 @@
+import { Suspense } from 'react';
+
 import NewVerificationForm from '@/components/auth/NewVerificationForm';
 
 function NewVerificationPage() {
-    return <NewVerificationForm />;
+    return (
+        <Suspense fallback={null}>
+            <NewVerificationForm />
+        </Suspense>
+    );
 }
 
 export default NewVerificationPage;

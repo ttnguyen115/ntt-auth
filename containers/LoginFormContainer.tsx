@@ -4,7 +4,7 @@ import LoginForm from '@/components/auth/LoginForm';
 
 function LoginFormContainer() {
     return (
-        <Suspense>
+        <Suspense fallback={null}>
             <LoginForm />
         </Suspense>
     );

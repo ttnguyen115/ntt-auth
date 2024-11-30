@@ -7,6 +7,9 @@ import { getUserByEmail } from '@/fetchers';
 
 import { AppRoutes, LoginSchema } from '@/configs';
 
+import { sendVerificationEmail } from '@/lib/mail';
+import { generateVerificationToken } from '@/lib/tokens';
+
 import type { ILoginResponse, LoginSchemaValues } from '@/types';
 
 /**
@@ -36,13 +39,15 @@ async function login(values: LoginSchemaValues): Promise<ILoginResponse | undefi
             };
         }
 
-        // if (!existingUser.emailVerified) {
-        //     const verificationToken = await generateVerificationToken(existingUser.email);
-        //     return {
-        //         success: true,
-        //         message: 'Confirm verification token!',
-        //     };
-        // }
+        if (!existingUser.emailVerified) {
+            const { email: returnedEmail, token } = await generateVerificationToken(existingUser.email);
+            await sendVerificationEmail(returnedEmail, token);
+
+            return {
+                success: true,
+                message: 'Confirm verification token!',
+            };
+        }
 
         // Can use DEFAULT_LOGIN_REDIRECT with the same value, but that var should be only used for middleware
         // Or can use custom callbackUrl to redirect
