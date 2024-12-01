@@ -37,8 +37,8 @@ function LoginForm() {
     const form = useForm<LoginSchemaValues>({
         resolver: zodResolver(LoginSchema),
         defaultValues: {
-            email: '',
-            password: '',
+            email: process.env.NODE_ENV !== 'production' ? process.env.TEST_CREDENTIAL_EMAIL : '',
+            password: process.env.NODE_ENV !== 'production' ? process.env.TEST_CREDENTIAL_PASSWORD : '',
         },
     });
 
