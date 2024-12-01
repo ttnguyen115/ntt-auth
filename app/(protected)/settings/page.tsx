@@ -1,24 +1,22 @@
-import { auth, signOut } from '@/auth';
+'use client';
 
-import { AppRoutes } from '@/configs';
+import { logout } from '@/actions';
 
-async function SettingsPage() {
-    const session = await auth();
+import { Button } from '@/components/ui/button';
+
+function SettingsPage() {
+    const onClick = () => {
+        logout();
+    };
 
     return (
-        <div>
-            {JSON.stringify(session)}
-            <form
-                action={async () => {
-                    'use server';
-
-                    await signOut({
-                        redirectTo: AppRoutes.LOGIN,
-                    });
-                }}
+        <div className="bg-white p-10 rounded-xl ">
+            <Button
+                onClick={onClick}
+                type="submit"
             >
-                <button type="submit">Sign out</button>
-            </form>
+                Sign out
+            </Button>
         </div>
     );
 }

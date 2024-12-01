@@ -2,9 +2,9 @@
 
 import { memo } from 'react';
 
+import Social from '@/components/auth/Social';
 import BackButton from '@/components/shared/BackButton';
 import Header from '@/components/shared/Header';
-import Social from '@/components/shared/Social';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 
 import { Children } from '@/types';
