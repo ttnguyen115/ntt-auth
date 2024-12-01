@@ -4,14 +4,14 @@ import { AppRoutes } from '@/configs';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export enum LinkType {
+enum LinkType {
     // eslint-disable-next-line no-unused-vars
     NEW,
     // eslint-disable-next-line no-unused-vars
     RESET,
 }
 
-export const generateLink = (type: LinkType, token: string) => {
+const generateLink = (type: LinkType, token: string) => {
     let ROUTE: string = '';
 
     switch (type) {

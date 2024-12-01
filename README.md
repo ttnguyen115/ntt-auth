@@ -34,3 +34,21 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+- test step:
+```npm
+npm i -D cross-env @testing-library/dom @testing-library/jest-dom @testing-library/react @testing-library/user-event jest-fail-on-console jest-fetch-mock jest-environment-jsdom next-router-mock
+```
+- scripts:
+```json
+{
+    "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
+    "test:coverage": "cross-env BABEL_ENV=test jest --passWithNoTests --coverage"
+}
+```
+- debug nextjs script:
+```json
+{
+    "inspect": "NODE_OPTIONS='--inspect' next dev"
+}
+```
