@@ -21,3 +21,9 @@ export interface IResetResponse {
     success: boolean;
     message?: string;
 }
+
+export interface INewPasswordResponse {
+    error?: string;
+    success: boolean;
+    message?: string;
+}

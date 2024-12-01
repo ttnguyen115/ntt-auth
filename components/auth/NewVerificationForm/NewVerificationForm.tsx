@@ -4,19 +4,18 @@ import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
 import { BeatLoader } from 'react-spinners';
 
-import { useSearchParams } from 'next/navigation';
-
 import { newVerification } from '@/actions';
 
 import { AppRoutes } from '@/configs';
+
+import { useSearchParamsBy } from '@/hooks';
 
 import CardWrapper from '@/components/shared/CardWrapper';
 import FormError from '@/components/shared/FormError';
 import FormSuccess from '@/components/shared/FormSuccess';
 
 function NewVerificationForm() {
-    const searchParams = useSearchParams();
-    const token = searchParams.get('token');
+    const token = useSearchParamsBy('token');
 
     const [error, setError] = useState<string | undefined>();
     const [success, setSuccess] = useState<string | undefined>();

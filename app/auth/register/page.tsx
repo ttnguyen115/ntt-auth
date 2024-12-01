@@ -1,4 +1,4 @@
-import RegisterFormContainer from '@/containers/RegisterFormContainer';
+import { RegisterFormContainer } from '@/containers';
 
 function RegisterPage() {
     return <RegisterFormContainer />;
