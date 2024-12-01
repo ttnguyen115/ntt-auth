@@ -1,7 +1,8 @@
 export interface ILoginResponse {
     error?: string;
-    success: boolean;
+    success?: boolean;
     message?: string;
+    twoFactor?: boolean;
 }
 
 export interface IRegisterResponse {

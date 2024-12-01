@@ -63,3 +63,18 @@ export async function sendPasswordResetEmail(email: string, token: string) {
         html: `<p>Click <a href="${resetLink}">here</a> to confirm email.</p>`,
     });
 }
+
+/**
+ * This is lib function to handle sending 2FA token email
+ * @param {string} email
+ * @param {string} token
+ * @returns {Promise<void>}
+ */
+export async function sendTwoFactorTokenEmail(email: string, token: string) {
+    await resend.emails.send({
+        from: 'onboarding@resend.dev',
+        to: email,
+        subject: '[ntt-auth] Confirm your email',
+        html: `<p>Your 2FA code: ${token}</p>`,
+    });
+}

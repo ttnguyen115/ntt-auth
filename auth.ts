@@ -5,7 +5,7 @@ import NextAuth from 'next-auth';
 
 import authConfig from './auth.config';
 import { AppRoutes } from './configs';
-import { getUserById } from './fetchers';
+import { getTwoFactorConfirmationByUserId, getUserById } from './fetchers';
 import { db } from './lib/db';
 
 export const {
@@ -35,7 +35,15 @@ export const {
             // Prevent signing in without email verification
             if (!existingUser?.emailVerified) return false;
 
-            // TODO: Add 2FA check
+            if (existingUser.isTwoFactorEnabled) {
+                const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id);
+                if (!twoFactorConfirmation) return false;
+
+                // Delete 2FA confirmation for the next sign in
+                await db.twoFactorConfirmation.delete({
+                    where: { id: twoFactorConfirmation.id },
+                });
+            }
 
             return true;
         },
