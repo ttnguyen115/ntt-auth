@@ -17,7 +17,7 @@ const ONE_MILLION = ONE_HUNDRED_THOUSAND * 10;
  */
 export async function generateVerificationToken(email: string) {
     const token = uuid();
-    const expires = new Date(new Date().getTime() + ONE_HOUR).toString();
+    const expires = new Date(new Date().getTime() + ONE_HOUR);
     const existingToken = await getVerificationTokenByEmail(email);
 
     if (existingToken) {
@@ -42,7 +42,7 @@ export async function generateVerificationToken(email: string) {
  */
 export async function generatePasswordResetToken(email: string) {
     const token = uuid();
-    const expires = new Date(new Date().getTime() + ONE_HOUR).toString();
+    const expires = new Date(new Date().getTime() + ONE_HOUR);
     const existingToken = await getVerificationTokenByEmail(email);
 
     if (existingToken) {
@@ -68,7 +68,7 @@ export async function generatePasswordResetToken(email: string) {
 export async function generateTwoFactorToken(email: string) {
     const token = crypto.randomInt(ONE_HUNDRED_THOUSAND, ONE_MILLION).toString();
     // TODO: Later change to 15 minutes
-    const expires = new Date(new Date().getTime() + ONE_HOUR).toString();
+    const expires = new Date(new Date().getTime() + ONE_HOUR);
 
     const existingToken = await getTwoFactorTokenByEmail(email);
 
