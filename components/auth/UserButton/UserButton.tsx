@@ -21,7 +21,7 @@ function UserButton() {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <DropdownMenuTrigger aria-label="UserButtonDropdownTrigger">
                 <Avatar>
                     <AvatarImage src={user?.image || ''} />
                     <AvatarFallback className="bg-sky-500">
