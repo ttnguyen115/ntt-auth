@@ -2,6 +2,8 @@ const AppRoutes = {
     DEFAULT: '/',
 
     API_AUTH: '/api/auth',
+    API_ADMIN: '/api/admin',
+
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
     VERIFICATION: '/auth/new-verification',

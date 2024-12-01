@@ -5,6 +5,8 @@ import { SessionProvider } from 'next-auth/react';
 
 import { auth } from '@/auth';
 
+import { Toaster } from '@/components/ui/sonner';
+
 import type { Children } from '@/types';
 
 import './globals.css';
@@ -26,6 +28,7 @@ export default async function RootLayout({ children }: Readonly<Children>) {
                     className={inter.className}
                     suppressHydrationWarning
                 >
+                    <Toaster />
                     {children}
                 </body>
             </html>
