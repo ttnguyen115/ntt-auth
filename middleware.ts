@@ -27,7 +27,6 @@ export default auth((req) => {
     }
 
     if (!isLoggedIn && !isPublicRoute) {
-        // TODO: idk but when logging out, it does not redirect to AppRoutes.Login
         return NextResponse.redirect(new URL(AppRoutes.LOGIN, nextUrl));
     }
 

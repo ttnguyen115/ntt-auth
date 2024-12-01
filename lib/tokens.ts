@@ -10,6 +10,8 @@ const ONE_HOUR = 3600 * 1000;
 const ONE_HUNDRED_THOUSAND = 100_000;
 const ONE_MILLION = ONE_HUNDRED_THOUSAND * 10;
 
+const FIFTHTEEN_MINUTES = ONE_HOUR / 4 || 5 * 60 * 1000;
+
 /**
  * This function is used for deleting and creating a brand-new token based on email
  * @param {string} email
@@ -67,8 +69,7 @@ export async function generatePasswordResetToken(email: string) {
  */
 export async function generateTwoFactorToken(email: string) {
     const token = crypto.randomInt(ONE_HUNDRED_THOUSAND, ONE_MILLION).toString();
-    // TODO: Later change to 15 minutes
-    const expires = new Date(new Date().getTime() + ONE_HOUR);
+    const expires = new Date(new Date().getTime() + FIFTHTEEN_MINUTES);
 
     const existingToken = await getTwoFactorTokenByEmail(email);
 

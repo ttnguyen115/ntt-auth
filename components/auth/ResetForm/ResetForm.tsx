@@ -39,7 +39,6 @@ function ResetForm() {
             reset(values).then((result) => {
                 if (result?.success) {
                     setSuccess(result?.message);
-                    // TODO: add success notification when adding 2FA
                 }
                 setError(result?.error);
             });
