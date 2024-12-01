@@ -25,6 +25,7 @@ model User {
   twoFactorConfirmation TwoFactorConfirmation?
 }
 
+// Use for GitHub & Google providers
 model Account {
   id                String @id @default(cuid())
   userId            String

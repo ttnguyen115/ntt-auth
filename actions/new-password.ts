@@ -68,7 +68,7 @@ async function newPassword(values: NewPasswordSchemaValues, token?: string | nul
         data: { password: hashedPassword },
     });
     await db.passwordResetToken.delete({
-        where: { id: existingUser.id },
+        where: { id: existingToken.id },
     });
 
     return {

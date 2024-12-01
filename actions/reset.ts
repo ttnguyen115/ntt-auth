@@ -2,7 +2,7 @@
 
 import { getUserByEmail } from '@/fetchers';
 
-import { LoginSchema } from '@/configs';
+import { ResetSchema } from '@/configs';
 
 import { sendPasswordResetEmail } from '@/lib/mail';
 import { generatePasswordResetToken } from '@/lib/tokens';
@@ -15,7 +15,7 @@ import type { IResetResponse, ResetSchemaValues } from '@/types';
  * @returns {Promise<IResetResponse>}
  */
 async function reset(values: ResetSchemaValues): Promise<IResetResponse> {
-    const { error, data } = LoginSchema.safeParse(values);
+    const { error, data } = ResetSchema.safeParse(values);
 
     if (error) {
         return {
