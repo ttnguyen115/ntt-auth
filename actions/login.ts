@@ -16,10 +16,11 @@ import type { ILoginResponse, LoginSchemaValues } from '@/types';
 /**
  * This is server function to handle login by email-password credential
  * @param {LoginSchemaValues} values
+ * @param {string | null} callbackUrl
  * @returns {Promise<ILoginResponse>}
  */
 // eslint-disable-next-line consistent-return
-async function login(values: LoginSchemaValues): Promise<ILoginResponse | undefined> {
+async function login(values: LoginSchemaValues, callbackUrl?: string | null): Promise<ILoginResponse | undefined> {
     const { error, data } = LoginSchema.safeParse(values);
 
     if (error) {
@@ -97,7 +98,7 @@ async function login(values: LoginSchemaValues): Promise<ILoginResponse | undefi
     try {
         // Can use DEFAULT_LOGIN_REDIRECT with the same value, but that var should be only used for middleware
         // Or can use custom callbackUrl to redirect
-        await signIn('credentials', { email, password, redirectTo: AppRoutes.SETTINGS });
+        await signIn('credentials', { email, password, redirectTo: callbackUrl || AppRoutes.SETTINGS });
     } catch (signInError) {
         if (signInError instanceof AuthError) {
             switch (signInError.type) {

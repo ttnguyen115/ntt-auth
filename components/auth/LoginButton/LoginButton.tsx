@@ -1,10 +1,14 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 
 import { useRouter } from 'next/navigation';
 
 import { AppRoutes } from '@/configs';
+
+import { LoginFormContainer } from '@/containers';
+
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 import { Children } from '@/types';
 
@@ -13,16 +17,24 @@ interface LoginButtonProps extends Children {
     asChild?: boolean;
 }
 
-function LoginButton({ children, mode = 'redirect', asChild = false }: LoginButtonProps) {
+function LoginButton({ children, mode = 'redirect', asChild }: LoginButtonProps) {
     const router = useRouter();
 
-    const handleClick = () => {
-        console.log(`This component is asChild: ${asChild}`);
+    const handleClick = useCallback(() => {
         router.push(AppRoutes.LOGIN);
-    };
+    }, [router]);
 
     if (mode === 'modal') {
-        return <span>TODO: Implementing modal</span>;
+        return (
+            <Dialog>
+                <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
+                <DialogContent className="p-0 w-auto bg-transparent border-none">
+                    <DialogTitle />
+                    <DialogDescription />
+                    <LoginFormContainer />
+                </DialogContent>
+            </Dialog>
+        );
     }
 
     return (

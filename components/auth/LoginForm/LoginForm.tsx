@@ -25,6 +25,8 @@ import type { LoginSchemaValues } from '@/types';
 
 function LoginForm() {
     const errorParam = useSearchParamsBy('error');
+    const callbackUrl = useSearchParamsBy('callbackUrl');
+
     const urlError =
         errorParam === 'OAuthAccountNotLinked' ? 'Email already in use with different provider!' : undefined;
 
@@ -47,7 +49,7 @@ function LoginForm() {
         setSuccess('');
 
         startTransition(() => {
-            login(values)
+            login(values, callbackUrl)
                 .then((result) => {
                     if (result?.success) {
                         form.reset();

@@ -16,13 +16,24 @@ export default function Home() {
             <div className="space-y-6 text-center">
                 <h1 className={cn('text-6xl font-semibold text-white drop-shadow-md', font.className)}>🔒 Auth</h1>
                 <p className="text-white text-lg">A simple authentication service</p>
-                <div>
+                <div className="flex flex-col items-center justify-center gap-2">
+                    <LoginButton
+                        mode="modal"
+                        asChild
+                    >
+                        <Button
+                            variant="secondary"
+                            size="lg"
+                        >
+                            Sign in with modal
+                        </Button>
+                    </LoginButton>
                     <LoginButton>
                         <Button
                             variant="secondary"
                             size="lg"
                         >
-                            Sign in
+                            Sign in with redirect
                         </Button>
                     </LoginButton>
                 </div>

@@ -4,6 +4,8 @@ import { AppRoutes } from '@/configs';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const domain = process.env.NODE_ENV === 'development' ? process.env.NEXT_PUBLIC_APP_URL : process.env.HOSTNAME;
+
 enum LinkType {
     // eslint-disable-next-line no-unused-vars
     NEW,
@@ -27,7 +29,7 @@ const generateLink = (type: LinkType, token: string) => {
             break;
     }
 
-    return `${process.env.HOSTNAME}${ROUTE}?token=${token}`;
+    return `${domain}${ROUTE}?token=${token}`;
 };
 
 /**

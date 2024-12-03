@@ -10,6 +10,8 @@ import { FcGoogle } from 'react-icons/fc';
 
 import { AppRoutes } from '@/configs';
 
+import { useSearchParamsBy } from '@/hooks';
+
 import { Button, type ButtonProps } from '@/components/ui/button';
 
 interface SocialCredential {
@@ -32,9 +34,11 @@ const socialCredentials: SocialCredential[] = [
 ];
 
 function Social() {
+    const callbackUrl = useSearchParamsBy('callbackUrl');
+
     const onClick = (provider: 'google' | 'github') => {
         signIn(provider, {
-            redirectTo: AppRoutes.SETTINGS,
+            redirectTo: callbackUrl || AppRoutes.SETTINGS,
         });
     };
 
