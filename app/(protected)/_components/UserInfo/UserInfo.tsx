@@ -45,7 +45,7 @@ function UserInfo({ user, label }: UserInfoProps) {
             key={key}
         >
             <p className="text-sm font-medium">{fieldLabel}</p>
-            {key !== 'UserInfo - isTwoFactorEnabled' ? (
+            {key !== 'UserInfo-isTwoFactorEnabled' ? (
                 <p className="truncate text-xs max-w-[180px] font-mono p-1 bg-slate-100 rounded-md">{content}</p>
             ) : (
                 <Badge variant={content ? 'success' : 'destructive'}>{content ? 'ON' : 'OFF'}</Badge>

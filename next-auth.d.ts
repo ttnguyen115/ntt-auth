@@ -6,6 +6,7 @@ declare module 'next-auth' {
         user: {
             role: 'ADMIN' | 'USER';
             isTwoFactorEnabled: boolean;
+            isOAuth: boolean;
         } & DefaultSession['user'];
     }
 }
@@ -16,4 +17,4 @@ declare module 'next-auth/jwt' {
     }
 }
 
-export type ExtendedUser = DefaultSession['user'] & { role: UserRole; isTwoFactorEnabled: boolean };
+export type ExtendedUser = DefaultSession['user'] & { role: UserRole; isTwoFactorEnabled: boolean; isOAuth: boolean };

@@ -5,6 +5,7 @@ export type {
     RegisterSchemaValues,
     ResetSchemaValues,
     NewPasswordSchemaValues,
+    SettingSchemaValues,
 } from './global/schemas';
 
 export type {
@@ -13,4 +14,5 @@ export type {
     IVerificationResponse,
     IResetResponse,
     INewPasswordResponse,
+    ISettingsResponse,
 } from './global/authResponse';

@@ -5,7 +5,7 @@ import NextAuth from 'next-auth';
 
 import authConfig from './auth.config';
 import { AppRoutes } from './configs';
-import { getTwoFactorConfirmationByUserId, getUserById } from './fetchers';
+import { getAccountByUserId, getTwoFactorConfirmationByUserId, getUserById } from './fetchers';
 import { db } from './lib/db';
 
 export const {
@@ -13,6 +13,7 @@ export const {
     auth,
     signIn,
     signOut,
+    unstable_update: update,
 } = NextAuth({
     pages: {
         signIn: AppRoutes.LOGIN,
@@ -56,8 +57,14 @@ export const {
                 session.user.role = token.role as UserRole;
             }
 
-            if (token.isTwoFactorEnabled && session.user) {
+            if (session.user) {
                 session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
+            }
+
+            if (token.name && token.email && token.isOAuth && session.user) {
+                session.user.name = token.name;
+                session.user.email = token.email;
+                session.user.isOAuth = token.isOAuth as boolean;
             }
 
             return session;
@@ -68,6 +75,11 @@ export const {
             const existingUser = await getUserById(token.sub);
             if (!existingUser) return token;
 
+            const existingAccount = await getAccountByUserId(existingUser.id);
+
+            token.isOAuth = !!existingAccount;
+            token.name = existingUser.name;
+            token.email = existingUser.email;
             token.role = existingUser.role;
             token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
 
